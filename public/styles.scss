@@ -1,0 +1,143 @@
+$footer-color: #aaa;
+
+html {
+  margin: 0px;
+  height: 100vh;
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif, Tahoma;
+  background-color: #dddddd;
+
+  background: radial-gradient(circle, white, lightgray);
+}
+
+@media (min-width: 1200px) {
+  .App {
+    box-shadow: gray 0px 0px 10px;
+  }
+}
+
+/* App */
+.App {
+  height: 100vh;
+  min-width: 360px;
+  min-height: 640px;
+
+  max-width: 1200px;
+  margin: auto;
+
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+
+  .App-header {
+    height: 48px;
+    line-height: 48px;
+    
+    background-color: #222;
+    padding: 10px 15px;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    h2 {
+      margin: 0px;
+    }
+
+    .toolbar {
+      font-weight: bold;
+
+      h2 {
+        display: inline-block;
+        padding: 0px 10px;
+        font-size: 18pt;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .loader {
+    padding: 20px;
+  }
+
+  footer {
+    padding: 5px 10px;
+  }
+
+  .content {
+    height: 100%;
+    overflow-y: scroll;
+    background-color: white;
+
+    .notes-list {
+      .notes-list__item {
+        display: flex;
+        justify-content: space-between;
+        padding: 0px 10px;
+        line-height: 36px;
+  
+        &:hover {
+          background-color: #eeeeee;
+
+          .notes-list__item-remove {
+            display: inline-block;
+          }
+        }
+
+        .notes-list__item-title {
+          width: 100%;
+        }
+
+        .notes-list__item-remove {
+          display: none;
+          width: 32px;
+          color: red;
+          text-align: center;
+          font-size: x-large;
+          cursor: pointer;
+          user-select: none;
+
+          &:hover {
+            background-color: #ffeeee;
+          }
+        }
+      }
+    }
+
+    .note-edit {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: stretch;
+
+      .note-edit__info,
+      .note-edit__editor {
+        margin: 10px;
+      }
+
+      .note-edit__info {
+        font-style: italic;
+        color: gray;
+      }
+
+      .note-edit__editor {
+        height: 100%;
+        textarea {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+  }
+
+  footer {
+    height: 26px;
+    line-height: 26px;
+    background-color: $footer-color;
+  }
+}
