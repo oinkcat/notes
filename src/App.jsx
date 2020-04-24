@@ -76,18 +76,21 @@ class App extends Component {
   saveNote = () => {
     const noteToSave = this.editorRef.current.getEditingNote();
 
+    let promise;
     if(noteToSave.id === null) {
-      Client.addNote(noteToSave.text);
+      promise = Client.addNote(noteToSave.text);
     } else {
-      Client.updateNote(noteToSave.id, noteToSave.text);
+      promise = Client.updateNote(noteToSave.id, noteToSave.text);
     }
 
-    this.setState({
-      view: App.VIEW_LIST,
-      selectedNote: null
+    promise.then(() => {
+      this.setState({
+        view: App.VIEW_LIST,
+        selectedNote: null
+      });
+  
+      this.reloadNotes();
     });
-
-    this.reloadNotes();
   }
 
   render() {

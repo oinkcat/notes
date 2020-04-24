@@ -1,55 +1,96 @@
-// Simple notes database
+// Notes database
 
-let nextId = 1;
-const notes = [];
+const sqlite3 = require('sqlite3');
 
-/** Generate sample list of notes */
-function generateTestNotes() {
-    const NUM_NOTES = 10;
+const DB_FILENAME = 'notes.db';
+let notesDb = null;
 
-    const ts = new Date();
+/** Open notes database or create if not exists */
+function openOrCreateDataBase() {
+    notesDb = new sqlite3.Database(DB_FILENAME);
 
-    while(nextId <= NUM_NOTES) {
-        const newNote = {
-            id: nextId,
-            title: `Note #${nextId}`,
-            text: 'Sample content',
-            updated: ts
-        };
-        notes.push(newNote);
-
-        nextId++;
-    }
+    notesDb.get("SELECT 1 FROM sqlite_master WHERE tbl_name = 'notes'", (err, row) => {
+        if(!row) {
+            notesDb.run(`CREATE TABLE notes (
+                            id INTEGER PRIMARY KEY AUTOINCREMENT,
+                            title text(64),
+                            content text(4096),
+                            modify_date text(64))`);
+        }
+    });
 }
 
 /** Get list that contains all notes */
 function getNotesList() {
-    return notes;
+    return new Promise((resolve, reject) => {
+        notesDb.all('SELECT * FROM notes', (err, rows) => {
+            if(!err) {
+                let notes = rows.map(r => createNoteFromDbRow(r));
+                resolve(notes);
+            } else {
+                reject(err);
+            }
+        });
+    });
 }
 
 /** Get particular note by it's identifier */
 function getNoteById(id) {
-    return notes.find(n => n.id === id);
+    return new Promise((resolve, reject) => {
+        notesDb.get('SELECT * FROM notes WHERE id = ?', [id], (err, row) => {
+            if(!err) {
+                if(row) {
+                    let note = createNoteFromDbRow(row);
+                    resolve(note);
+                } else {
+                    resolve(undefined);
+                }
+            } else {
+                reject(err);
+            }
+        });
+    });
+}
+
+function createNoteFromDbRow(row) {
+    return {
+        id: row['id'],
+        title: row['title'],
+        text: row['content'],
+        updated: new Date(row['modify_date'])
+    };
 }
 
 /** Store new note */
 function appendNewNote(noteData) {
-    let newNote = createNoteFromDTO(noteData);
-    newNote.id = nextId;
-    notes.push(newNote);
+    return new Promise((resolve, _) => {
+        let note = createNoteFromDTO(noteData);
 
-    nextId++;
+        notesDb.run(`INSERT INTO notes (title, content, modify_date) 
+                        VALUES (?, ?, ?)`, [
+                            note.title,
+                            note.text,
+                            note.updated
+                        ], _ => resolve());
+    });
 }
 
 /** Update note info */
 function updateExistingNote(id, noteData) {
-    let noteToUpdateIdx = notes.findIndex(n => n.id === id);
+    return new Promise((resolve, _) => {
+        let note = createNoteFromDTO(noteData);
 
-    if(noteToUpdateIdx > -1) {
-        let newNote = createNoteFromDTO(noteData);
-        newNote.id = id;
-        notes.splice(noteToUpdateIdx, 1, newNote);
-    }
+        notesDb.run(`UPDATE notes SET
+                        title = ?,
+                        content = ?,
+                        modify_date = ?
+                        WHERE id = ?`, [
+                            note.title,
+                            note.text,
+                            note.updated,
+                            id
+                        ], _ => resolve());
+    });
 }
 
 function createNoteFromDTO(dto) {
@@ -63,14 +104,12 @@ function createNoteFromDTO(dto) {
 
 /** Remove existing note with given id */
 function removeNoteById(id) {
-    let noteToRemoveIdx = notes.findIndex(n => n.id === id);
-
-    if(noteToRemoveIdx > -1) {
-        notes.splice(noteToRemoveIdx, 1);
-    }
+    return new Promise((resolve, _) => {
+        notesDb.run('DELETE FROM notes WHERE id = ?', [id], _ => resolve());
+    });
 }
 
-generateTestNotes();
+openOrCreateDataBase();
 
 module.exports = {
     getAllNotes: getNotesList,

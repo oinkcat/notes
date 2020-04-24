@@ -45,6 +45,7 @@ export function updateNote(id, text) {
     return fetch(`${SVC_URL}/${id}`, {
         method: 'PUT',
         headers: {
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify(noteTempObj)
     });

@@ -7,14 +7,14 @@ const db = require('./notes-db');
 const app = express();
 
 // GET / - List of all notes
-app.get('/api/', (req, res) => {
-    const allNotes = db.getAllNotes();
+app.get('/api/', async (_, res) => {
+    const allNotes = await db.getAllNotes();
     res.json(allNotes);
 });
 
 // GET /:id - Get note by id
-app.get('/api/:id', (req, res) => {
-    const requestedNote = db.getNote(parseInt(req.params.id));
+app.get('/api/:id', async (req, res) => {
+    const requestedNote = await db.getNote(parseInt(req.params.id));
 
     if(typeof(requestedNote) != 'undefined') {
         res.json(requestedNote);
@@ -24,25 +24,24 @@ app.get('/api/:id', (req, res) => {
 });
 
 // PUT /:id - Put new note or replace existing
-app.put('/api/:id', jsonParser, (req, res) => {
+app.put('/api/:id', jsonParser, async (req, res) => {
     const noteId = parseInt(req.params.id);
-    console.log(req.body);
     const noteIsNew = noteId <= 0;
 
     if(noteIsNew) {
-        db.addNewNote(req.body);
+        await db.addNewNote(req.body);
     } else {
-        db.updateNote(noteId, req.body);
+        await db.updateNote(noteId, req.body);
     }
 
     res.end('OK');
 });
 
 // DELETE /:id - Remove note
-app.delete('/api/:id', (req, res) => {
+app.delete('/api/:id', async (req, res) => {
     const noteId = parseInt(req.params.id);
 
-    db.removeNote(noteId);
+    await db.removeNote(noteId);
     res.end('OK');
 });
 
