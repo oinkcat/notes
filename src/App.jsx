@@ -76,14 +76,18 @@ class App extends Component {
   saveNote = () => {
     const noteToSave = this.editorRef.current.getEditingNote();
 
-    let promise;
-    if(noteToSave.id === null) {
-      promise = Client.addNote(noteToSave.text);
-    } else {
-      promise = Client.updateNote(noteToSave.id, noteToSave.text);
+    if(noteToSave.text.trim().length <= 0) {
+      return;
     }
 
-    promise.then(() => {
+    let savePromise;
+    if(noteToSave.id === null) {
+      savePromise = Client.addNote(noteToSave.text);
+    } else {
+      savePromise = Client.updateNote(noteToSave.id, noteToSave.text);
+    }
+
+    savePromise.then(() => {
       this.setState({
         view: App.VIEW_LIST,
         selectedNote: null
@@ -91,6 +95,23 @@ class App extends Component {
   
       this.reloadNotes();
     });
+  }
+
+  renderAppViews() {
+    return (
+      <React.Fragment>
+        { this.state.view === App.VIEW_LIST && 
+          <NotesList
+            notes={this.state.notes} 
+            noteClicked={this.noteSelected} 
+            noteRemoved={this.removeNote} /> }
+    
+        { this.state.view === App.VIEW_CONTENT && 
+          <NoteEditor
+            note={this.state.selectedNote}
+            ref={this.editorRef} /> }
+        </React.Fragment>
+    );
   }
 
   render() {
@@ -104,16 +125,7 @@ class App extends Component {
         />
 
         <div className="content">
-          { this.state.loading && <Loader /> }
-
-          { this.state.view === App.VIEW_LIST && 
-            <NotesList
-              notes={this.state.notes} 
-              noteClicked={this.noteSelected} 
-              noteRemoved={this.removeNote} /> }
-
-          { this.state.view === App.VIEW_CONTENT && 
-            <NoteEditor note={this.state.selectedNote} ref={this.editorRef} />}
+          { this.state.loading ? <Loader /> : this.renderAppViews() }
         </div>
 
         <Footer />

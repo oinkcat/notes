@@ -1,6 +1,6 @@
 import Note from './Note.js';
 
-const SVC_URL = 'http://localhost:3000/api';
+const SVC_URL = `http://${location.host}/api`;
 
 /** Get a list of all notes */
 export function fetchAllNotes() {

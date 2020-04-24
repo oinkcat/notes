@@ -53,6 +53,10 @@ body {
       font-weight: bold;
 
       h2 {
+        &:hover {
+          background-color: #333333;
+        }
+
         display: inline-block;
         padding: 0px 10px;
         font-size: 18pt;
@@ -79,6 +83,7 @@ body {
         display: flex;
         justify-content: space-between;
         padding: 0px 10px;
+        border-bottom: 1px solid #dddddd;
         line-height: 36px;
   
         &:hover {

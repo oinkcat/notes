@@ -3,8 +3,8 @@ import React from 'react';
 /** Toolbar button */
 function ToolButton(props) {
   return (
-    <h2>
-      <a onClick={props.onclick} title={props.title}>
+    <h2 onClick={props.onclick}>
+      <a title={props.title}>
         {props.children}
       </a>
     </h2>

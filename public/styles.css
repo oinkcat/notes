@@ -70,6 +70,10 @@ body {
   cursor: pointer;
 }
 
+.App .App-header .toolbar h2:hover {
+  background-color: #333333;
+}
+
 .App .loader {
   padding: 20px;
 }
@@ -92,6 +96,7 @@ body {
       -ms-flex-pack: justify;
           justify-content: space-between;
   padding: 0px 10px;
+  border-bottom: 1px solid #dddddd;
   line-height: 36px;
 }
 

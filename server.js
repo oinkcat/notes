@@ -1,10 +1,15 @@
 // Server app for Notes
+const SERVER_PORT = 8080;
+const STATIC_DIR = 'build';
 
 const express = require('express');
 const jsonParser = require('body-parser').json();
 const db = require('./notes-db');
 
 const app = express();
+
+// Static content
+app.use(express.static(`${__dirname}/${STATIC_DIR}`));
 
 // GET / - List of all notes
 app.get('/api/', async (_, res) => {
@@ -52,4 +57,6 @@ app.use((req, res) => {
     res.end('Bad Request');
 });
 
-app.listen(8080, () => console.log('Server ready...'));
+app.listen(SERVER_PORT, () => {
+    console.log(`App ready on port ${SERVER_PORT}`);
+});
