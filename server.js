@@ -28,16 +28,17 @@ app.get('/api/:id', async (req, res) => {
     }
 });
 
-// PUT /:id - Put new note or replace existing
+// POST / - Save new note
+app.post('/api/', jsonParser, async (req, res) => {
+    await db.addNewNote(req.body);
+
+    res.end('OK');
+});
+
+// PUT /:id - Update existing note
 app.put('/api/:id', jsonParser, async (req, res) => {
     const noteId = parseInt(req.params.id);
-    const noteIsNew = noteId <= 0;
-
-    if(noteIsNew) {
-        await db.addNewNote(req.body);
-    } else {
-        await db.updateNote(noteId, req.body);
-    }
+    await db.updateNote(noteId, req.body);
 
     res.end('OK');
 });

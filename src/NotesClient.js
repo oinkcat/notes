@@ -28,8 +28,8 @@ export function addNote(text) {
     let newNoteTempObj = new Note(0, null, text, null);
     newNoteTempObj.update();
 
-    return fetch(`${SVC_URL}/0`, {
-        method: 'PUT',
+    return fetch(SVC_URL, {
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
