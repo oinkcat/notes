@@ -21,7 +21,7 @@ function openOrCreateDataBase() {
 }
 
 /** Get list that contains all notes */
-function getNotesList() {
+async function getNotesList() {
     return new Promise((resolve, reject) => {
         notesDb.all('SELECT * FROM notes', (err, rows) => {
             if(!err) {
@@ -35,7 +35,7 @@ function getNotesList() {
 }
 
 /** Get particular note by it's identifier */
-function getNoteById(id) {
+async function getNoteById(id) {
     return new Promise((resolve, reject) => {
         notesDb.get('SELECT * FROM notes WHERE id = ?', [id], (err, row) => {
             if(!err) {
@@ -62,7 +62,7 @@ function createNoteFromDbRow(row) {
 }
 
 /** Store new note */
-function appendNewNote(noteData) {
+async function appendNewNote(noteData) {
     return new Promise((resolve, _) => {
         let note = createNoteFromDTO(noteData);
 
@@ -76,7 +76,7 @@ function appendNewNote(noteData) {
 }
 
 /** Update note info */
-function updateExistingNote(id, noteData) {
+async function updateExistingNote(id, noteData) {
     return new Promise((resolve, _) => {
         let note = createNoteFromDTO(noteData);
 
@@ -103,7 +103,7 @@ function createNoteFromDTO(dto) {
 }
 
 /** Remove existing note with given id */
-function removeNoteById(id) {
+async function removeNoteById(id) {
     return new Promise((resolve, _) => {
         notesDb.run('DELETE FROM notes WHERE id = ?', [id], _ => resolve());
     });

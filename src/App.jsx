@@ -4,6 +4,7 @@ import NotesList from './NotesList';
 import NoteEditor from './NoteEditor';
 import Footer from './Footer';
 import Loader from './Loader';
+import EmptyMessage from './EmptyMessage';
 import Note from './Note';
 import * as Client from './NotesClient';
 
@@ -100,11 +101,15 @@ class App extends Component {
   renderAppViews() {
     return (
       <React.Fragment>
-        { this.state.view === App.VIEW_LIST && 
-          <NotesList
-            notes={this.state.notes} 
-            noteClicked={this.noteSelected} 
-            noteRemoved={this.removeNote} /> }
+        { this.state.view === App.VIEW_LIST && (
+            (this.state.notes.length > 0)
+              ? <NotesList
+                  notes={this.state.notes} 
+                  noteClicked={this.noteSelected} 
+                  noteRemoved={this.removeNote} />
+              : <EmptyMessage />
+            )
+           }
     
         { this.state.view === App.VIEW_CONTENT && 
           <NoteEditor
