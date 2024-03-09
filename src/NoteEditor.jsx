@@ -37,7 +37,7 @@ export default class NoteEditor extends React.Component {
                 </div>
 
                 <div className="note-edit__editor">
-                    <textarea onChange={this.updateText} value={this.state.note.text}>
+                    <textarea autoFocus onChange={this.updateText} value={this.state.note.text}>
                     </textarea>
                 </div>
             </div>

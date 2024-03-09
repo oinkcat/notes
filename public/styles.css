@@ -14,11 +14,9 @@ body {
 
 @media (min-width: 1200px) {
   .App {
-    -webkit-box-shadow: gray 0px 0px 10px;
-            box-shadow: gray 0px 0px 10px;
+    box-shadow: gray 0px 0px 10px;
   }
 }
-
 /* App */
 .App {
   height: 100vh;
@@ -26,95 +24,68 @@ body {
   min-height: 640px;
   max-width: 1200px;
   margin: auto;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -ms-flex-line-pack: justify;
-      align-content: space-between;
+  flex-direction: column;
+  align-content: space-between;
 }
-
 .App .App-header {
   height: 48px;
   line-height: 48px;
   background-color: #222;
   padding: 10px 15px;
   color: white;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  flex-direction: row;
+  justify-content: space-between;
 }
-
 .App .App-header h2 {
   margin: 0px;
 }
-
 .App .App-header .toolbar {
   font-weight: bold;
 }
-
 .App .App-header .toolbar h2 {
   display: inline-block;
   padding: 0px 10px;
   font-size: 18pt;
   cursor: pointer;
 }
-
 .App .App-header .toolbar h2:hover {
   background-color: #333333;
 }
-
 .App .message {
   text-align: center;
   font-size: x-large;
   color: #777;
   padding: 20px;
 }
-
+.App .message .sign {
+  font-size: 36pt;
+}
 .App footer {
   padding: 5px 10px;
 }
-
 .App .content {
   height: 100%;
   overflow-y: scroll;
   background-color: white;
 }
-
 .App .content .notes-list .notes-list__item {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  justify-content: space-between;
   padding: 0px 10px;
   border-bottom: 1px solid #dddddd;
   line-height: 36px;
 }
-
 .App .content .notes-list .notes-list__item:hover {
   background-color: #eeeeee;
 }
-
 .App .content .notes-list .notes-list__item:hover .notes-list__item-remove {
   display: inline-block;
 }
-
 .App .content .notes-list .notes-list__item .notes-list__item-title {
   width: 100%;
 }
-
 .App .content .notes-list .notes-list__item .notes-list__item-remove {
   display: none;
   width: 32px;
@@ -124,50 +95,36 @@ body {
   cursor: pointer;
   -webkit-user-select: none;
      -moz-user-select: none;
-      -ms-user-select: none;
           user-select: none;
 }
-
 .App .content .notes-list .notes-list__item .notes-list__item-remove:hover {
   background-color: #ffeeee;
 }
-
 .App .content .note-edit {
   height: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: stretch;
-      -ms-flex-pack: stretch;
-          justify-content: stretch;
+  flex-direction: column;
+  justify-content: stretch;
 }
-
 .App .content .note-edit .note-edit__info,
 .App .content .note-edit .note-edit__editor {
   margin: 10px;
 }
-
 .App .content .note-edit .note-edit__info {
   font-style: italic;
   color: gray;
 }
-
 .App .content .note-edit .note-edit__editor {
   height: 100%;
 }
-
 .App .content .note-edit .note-edit__editor textarea {
   width: 100%;
   height: 100%;
+  border-radius: 4px;
+  border-color: lightgray;
 }
-
 .App footer {
   height: 26px;
   line-height: 26px;
   background-color: #aaa;
-}
-/*# sourceMappingURL=styles.css.map */
+}/*# sourceMappingURL=styles.css.map */

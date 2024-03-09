@@ -1,0 +1,2 @@
+# Exclude libraries
+py_server_src/bottle.py linguist-vendored=true
