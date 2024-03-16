@@ -27,7 +27,9 @@ export default function Header(props) {
             <ToolButton title="New note" onclick={props.onNewNote}>+</ToolButton>
           ) : (
             <React.Fragment>
-              <ToolButton title="Save" onclick={props.onSave}>&#10515;</ToolButton>
+              <ToolButton title="Save" onclick={props.onSave}>
+                <img src={process.env.PUBLIC_URL + 'save.png'} alt="Save" />
+              </ToolButton>
               <ToolButton title="Close" onclick={props.onClose}>&#10799;</ToolButton>
             </React.Fragment>
           )}

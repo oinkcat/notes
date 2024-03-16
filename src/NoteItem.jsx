@@ -17,7 +17,7 @@ export default class NoteItem extends React.Component {
                 <div className="notes-list__item-title" onClick={this.noteSelected}>
                     {this.props.note.title}
                 </div>
-                <div className="notes-list__item-remove" onClick={this.noteToRemove}>
+                <div className="notes-list__item-remove" onClick={this.noteToRemove} title="Remove">
                     &times;
                 </div>
             </div>

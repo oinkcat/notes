@@ -102,7 +102,10 @@ class NotesDatabase():
                             'content = ?, '
                             'modify_date = ? '
                             'WHERE id = ?',
-                        (*note_tuple[1:], note_tuple[0]))
+                        (note_tuple[1], 
+                         note_tuple[2], 
+                         note_tuple[3], 
+                         note_tuple[0]))
         self.db.commit()
     
     def remove_note_by_id(self, id):
