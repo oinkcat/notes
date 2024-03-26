@@ -5,6 +5,7 @@ import NoteEditor from './NoteEditor';
 import Footer from './Footer';
 import Loader from './Loader';
 import EmptyMessage from './EmptyMessage';
+import ErrorMessage from './ErrorMessage';
 import Note from './Note';
 import * as Client from './NotesClient';
 
@@ -17,6 +18,7 @@ class App extends Component {
     super();
 
     this.state = {
+      error: false,
       loading: true,
       view: App.VIEW_LIST,
       notes: [],
@@ -37,9 +39,13 @@ class App extends Component {
     Client.fetchAllNotes().then(loadedNotes => {
       this.setState({
         notes: loadedNotes,
+        error: null,
         loading: false
       });
-    });
+    })
+    .catch(e => this.setState({
+      error: e
+    }));
   }
 
   /**Note for editing was selected */
@@ -130,7 +136,9 @@ class App extends Component {
         />
 
         <div className="content">
-          { this.state.loading ? <Loader /> : this.renderAppViews() }
+          { (this.state.error == null)
+              ? (this.state.loading ? <Loader /> : this.renderAppViews())
+              : <ErrorMessage /> }
         </div>
 
         <Footer />

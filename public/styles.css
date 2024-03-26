@@ -53,16 +53,22 @@ body {
 .App .App-header .toolbar h2:hover {
   background-color: #333333;
 }
-.App .message {
+.App .message-container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.App .message-container .message {
   text-align: center;
   font-size: x-large;
   color: #777;
   padding: 20px;
 }
-.App .message .sign {
+.App .message-container .message .sign {
   font-size: 36pt;
 }
-.App .message img {
+.App .message-container .message img {
   width: 128px;
   height: 128px;
 }
