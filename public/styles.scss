@@ -1,4 +1,6 @@
-$footer-color: #aaa;
+$border-color: rgb(255, 250, 234);
+$footer-color: #f5ebd1;
+$corner-radius: 15px;
 
 html {
   margin: 0px;
@@ -17,7 +19,15 @@ body {
 
 @media (min-width: 1200px) {
   .App {
-    box-shadow: gray 0px 0px 10px;
+    .App-header {
+      border-top-left-radius: $corner-radius;
+      border-top-right-radius: $corner-radius;
+    }
+
+    footer {
+      border-bottom-left-radius: $corner-radius;
+      border-bottom-right-radius: $corner-radius;
+    }
   }
 }
 
@@ -59,7 +69,7 @@ body {
 
         display: inline-block;
         padding: 0px 10px;
-        font-size: 18pt;
+        font-size: 22pt;
         cursor: pointer;
       }
     }

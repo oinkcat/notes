@@ -15,7 +15,11 @@ export default class Note {
         const time = `${zNum(ts.getHours())}:${zNum(ts.getMinutes())}`;
         const date = ts.toLocaleDateString();
 
-        return `${time}, ${date}`;
+        const displayDate = (date == new Date().toLocaleDateString())
+            ? 'today'
+            : date;
+
+        return `${time}, ${displayDate}`;
     }
 
     update() {

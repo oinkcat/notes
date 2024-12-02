@@ -13,8 +13,13 @@ body {
 }
 
 @media (min-width: 1200px) {
-  .App {
-    box-shadow: gray 0px 0px 10px;
+  .App .App-header {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+  }
+  .App footer {
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
   }
 }
 /* App */
@@ -47,7 +52,7 @@ body {
 .App .App-header .toolbar h2 {
   display: inline-block;
   padding: 0px 10px;
-  font-size: 18pt;
+  font-size: 22pt;
   cursor: pointer;
 }
 .App .App-header .toolbar h2:hover {
@@ -138,5 +143,5 @@ body {
 .App footer {
   height: 26px;
   line-height: 26px;
-  background-color: #aaa;
+  background-color: #f5ebd1;
 }/*# sourceMappingURL=styles.css.map */
