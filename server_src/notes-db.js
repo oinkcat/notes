@@ -23,7 +23,7 @@ function openOrCreateDataBase() {
 /** Get list that contains all notes */
 async function getNotesList() {
     return new Promise((resolve, reject) => {
-        notesDb.all('SELECT * FROM notes', (err, rows) => {
+        notesDb.all('SELECT * FROM notes ORDER BY modify_date DESC', (err, rows) => {
             if(!err) {
                 let notes = rows.map(r => createNoteFromDbRow(r));
                 resolve(notes);

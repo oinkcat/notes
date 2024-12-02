@@ -79,7 +79,7 @@ class NotesDatabase():
     def get_notes_list(self):
         """ Return all notes """
 
-        cur = self.db.execute('SELECT * FROM notes')
+        cur = self.db.execute('SELECT * FROM notes ORDER BY modify_date DESC')
         all_notes = [Note.from_tuple(t) for t in cur.fetchall()]
         cur.close()
 
